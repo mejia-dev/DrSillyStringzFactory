@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Factory.Migrations
 {
     [DbContext(typeof(FactoryContext))]
-    [Migration("20240209184826_AddEngineerLicenseJoinEntity")]
-    partial class AddEngineerLicenseJoinEntity
+    [Migration("20240209185907_ChangeLicenseEntityToMachineEntityAndAssociations")]
+    partial class ChangeLicenseEntityToMachineEntityAndAssociations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,68 +37,68 @@ namespace Factory.Migrations
                     b.ToTable("Engineers");
                 });
 
-            modelBuilder.Entity("Factory.Models.EngineerLicense", b =>
+            modelBuilder.Entity("Factory.Models.EngineerMachine", b =>
                 {
-                    b.Property<int>("EngineerLicenseId")
+                    b.Property<int>("EngineerMachineId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("EngineerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LicenseId")
+                    b.Property<int>("MachineId")
                         .HasColumnType("int");
 
-                    b.HasKey("EngineerLicenseId");
+                    b.HasKey("EngineerMachineId");
 
                     b.HasIndex("EngineerId");
 
-                    b.HasIndex("LicenseId");
+                    b.HasIndex("MachineId");
 
-                    b.ToTable("EngineerLicenses");
+                    b.ToTable("EngineerMachines");
                 });
 
-            modelBuilder.Entity("Factory.Models.License", b =>
+            modelBuilder.Entity("Factory.Models.Machine", b =>
                 {
-                    b.Property<int>("LicenseId")
+                    b.Property<int>("MachineId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("LicenseName")
+                    b.Property<string>("MachineName")
                         .HasColumnType("longtext");
 
-                    b.HasKey("LicenseId");
+                    b.HasKey("MachineId");
 
-                    b.ToTable("Licenses");
+                    b.ToTable("Machines");
                 });
 
-            modelBuilder.Entity("Factory.Models.EngineerLicense", b =>
+            modelBuilder.Entity("Factory.Models.EngineerMachine", b =>
                 {
                     b.HasOne("Factory.Models.Engineer", "Engineer")
-                        .WithMany("EngineerLicenses")
+                        .WithMany("AssignedMachines")
                         .HasForeignKey("EngineerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Factory.Models.License", "License")
-                        .WithMany("LicensedEngineers")
-                        .HasForeignKey("LicenseId")
+                    b.HasOne("Factory.Models.Machine", "Machine")
+                        .WithMany("MachineEngineers")
+                        .HasForeignKey("MachineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Engineer");
 
-                    b.Navigation("License");
+                    b.Navigation("Machine");
                 });
 
             modelBuilder.Entity("Factory.Models.Engineer", b =>
                 {
-                    b.Navigation("EngineerLicenses");
+                    b.Navigation("AssignedMachines");
                 });
 
-            modelBuilder.Entity("Factory.Models.License", b =>
+            modelBuilder.Entity("Factory.Models.Machine", b =>
                 {
-                    b.Navigation("LicensedEngineers");
+                    b.Navigation("MachineEngineers");
                 });
 #pragma warning restore 612, 618
         }
