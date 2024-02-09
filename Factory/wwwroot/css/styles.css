@@ -1,0 +1,10 @@
+@import url('https://fonts.cdnfonts.com/css/earwig-factory');
+@import url('https://fonts.cdnfonts.com/css/airfactoryrounded');
+
+h1 {
+  font-family: 'Earwig Factory', sans-serif;
+}
+
+h2, h3, h4 {
+  font-family: 'AirFactoryRounded', sans-serif;
+}
