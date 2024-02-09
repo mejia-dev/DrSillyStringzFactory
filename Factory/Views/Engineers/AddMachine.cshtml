@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+@using Factory.Models;
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.EngineerId)
+  <p>License @Model.EngineerFirstName to work on a machine:</p>
+  @Html.DropDownList("MachineId")
+  <br />
+  <input type="submit" value="License" />
+}
+
+<p>@Html.ActionLink("Go back", "Details", new {id = Model.EngineerId})</p>

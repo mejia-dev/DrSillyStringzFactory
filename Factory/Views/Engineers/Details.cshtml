@@ -21,16 +21,25 @@ else
     @foreach(EngineerMachine join in Model.AssignedMachines)
     {
       <li>@Html.ActionLink($"{join.Machine.MachineName}", "Details", "Machines", new {id = join.Machine.MachineId})</li>
-      @using (Html.BeginForm("DeleteJoin", "Machines"))
+      @using (Html.BeginForm("DeleteLicense", "Engineers"))
       {
-        @Html.Hidden("joinId", @join.EngineerMachineId)
+        @Html.Hidden("licenseId", @join.EngineerMachineId)
         <input type="submit" value="Delete"/>
       }
     }
   </ul>
 }
 </p>
-<p>@Html.ActionLink("Add a Machine", "AddMachine", new { id = Model.EngineerId })</p>
+<p>
+@if (ViewBag.MachinesCount >= 1)
+{
+  @Html.ActionLink("Add a Machine", "AddMachine", new { id = Model.EngineerId })
+}
+else
+{
+  <p class="error">You must <span>@Html.ActionLink("add a machine", "Create", "Machines")</span> before you can license @Model.EngineerFirstName to a machine.</p>
+}
+</p>
 
 <br /><br />
 <p>@Html.ActionLink("Edit this Engineer", "Edit", new { id = Model.EngineerId })</p>

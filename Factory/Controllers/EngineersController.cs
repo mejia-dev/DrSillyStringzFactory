@@ -43,12 +43,13 @@ namespace Factory.Controllers
           .Include(eng => eng.AssignedMachines)
           .FirstOrDefault(eng => eng.EngineerId == id);
       ViewBag.PageTitle = $"Engineer Details - {thisEngineer.EngineerFullName} ";
+      ViewBag.MachinesCount = _db.Machines.Count();
       return View(thisEngineer);
     }
 
     public ActionResult Edit(int id)
     {
-      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engs => engs.EngineerId == id);
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engr => engr.EngineerId == id);
       ViewBag.PageTitle = $"Edit Engineer - {thisEngineer.EngineerFullName}";
       ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
       return View(thisEngineer);
@@ -64,7 +65,7 @@ namespace Factory.Controllers
 
     public ActionResult Delete(int id)
     {
-      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engs => engs.EngineerId == id);
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engr => engr.EngineerId == id);
       ViewBag.PageTitle = $"Delete Engineer - {thisEngineer.EngineerFullName}";
       return View(thisEngineer);
     }
@@ -72,8 +73,42 @@ namespace Factory.Controllers
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engs => engs.EngineerId == id);
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engr => engr.EngineerId == id);
       _db.Engineers.Remove(thisEngineer);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult AddMachine(int id)
+    {
+      Engineer thisEngineer = _db.Engineers
+        .Include(engr => engr.AssignedMachines)
+        .FirstOrDefault(engr => engr.EngineerId == id);
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
+      ViewBag.PageTitle = $"License {thisEngineer.EngineerFullName} For Machine";
+      return View(thisEngineer);
+    }
+
+    [HttpPost]
+    public ActionResult AddMachine(Engineer engr, int machineId)
+    {
+      #nullable enable
+      EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == engr.EngineerId));
+      #nullable disable
+      if (machineId != 0 && joinEntity == null)
+      {
+        EngineerMachine authorizedMachine = new EngineerMachine() { MachineId = machineId, EngineerId = engr.EngineerId};
+        _db.EngineerMachines.Add(authorizedMachine);
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = engr.EngineerId });
+    }
+
+    [HttpPost]
+    public ActionResult DeleteLicense(int licenseId)
+    {
+      EngineerMachine licenseEntry = _db.EngineerMachines.FirstOrDefault(entry => entry.EngineerMachineId == licenseId);
+      _db.EngineerMachines.Remove(licenseEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

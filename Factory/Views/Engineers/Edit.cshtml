@@ -15,9 +15,7 @@
     Engineer First Name: @Html.TextBoxFor(model => model.EngineerFirstName)<br />
     Engineer Last Name: @Html.TextBoxFor(model => model.EngineerLastName)<br />
   </p>
-  <p>Department: @Html.DropDownList("MachineId")</p><br />
-  
-  <input type="submit" value="Add this Engineer" />
+  <input type="submit" value="Confirm Changes" /><br />
   @Html.ActionLink("Discard Changes", "Details", new {id = @Model.EngineerId})
 }
 <br /><br />
