@@ -35,3 +35,8 @@ a {
   font-family: 'Wild Script', sans-serif;
   
 }
+
+.error {
+  color: red;
+  font-style: italic;
+}
