@@ -1,0 +1,41 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+@using Factory.Models;
+@using System.Collections.Generic;
+
+<h2>@ViewBag.PageTitle</h2>
+  
+
+<p><strong>Machines that @Model.EngineerFirstName is licensed to maintain:</strong>
+
+  @if (Model.AssignedMachines.Count == 0)
+{
+  <p>@Model.EngineerFirstName has not yet been licensed to work on any machines.</p>
+}
+else 
+{
+  <ul>
+    @foreach(EngineerMachine join in Model.AssignedMachines)
+    {
+      <li>@Html.ActionLink($"{join.Machine.MachineName}", "Details", "Machines", new {id = join.Machine.MachineId})</li>
+      @using (Html.BeginForm("DeleteJoin", "Machines"))
+      {
+        @Html.Hidden("joinId", @join.EngineerMachineId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+}
+</p>
+<p>@Html.ActionLink("Add a Machine", "AddMachine", new { id = Model.EngineerId })</p>
+
+<br /><br />
+<p>@Html.ActionLink("Edit this Engineer", "Edit", new { id = Model.EngineerId })</p>
+
+<p>@Html.ActionLink("Delete this Engineer", "Delete", new { id = Model.EngineerId })</p>
+
+<br /><br />
+<p>@Html.ActionLink("Back to list", "Index")</p>

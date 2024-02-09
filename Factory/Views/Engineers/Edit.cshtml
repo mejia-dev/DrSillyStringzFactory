@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+@using Factory.Models;
+
+<h2>@ViewBag.PageTitle</h2>
+
+@using ( Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.EngineerId)
+  @Html.HiddenFor(model => model.AssignedMachines)
+  <p>
+    Engineer First Name: @Html.TextBoxFor(model => model.EngineerFirstName)<br />
+    Engineer Last Name: @Html.TextBoxFor(model => model.EngineerLastName)<br />
+  </p>
+  <p>Department: @Html.DropDownList("MachineId")</p><br />
+  
+  <input type="submit" value="Add this Engineer" />
+  @Html.ActionLink("Discard Changes", "Details", new {id = @Model.EngineerId})
+}
+<br /><br />
+@Html.ActionLink("Back to All Engineers", "Index")
