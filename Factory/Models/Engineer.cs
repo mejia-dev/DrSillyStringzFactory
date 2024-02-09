@@ -7,7 +7,7 @@ namespace Factory.Models
     public int EngineerId { get; set; }
     public string EngineerFirstName { get; set; }
     public string EngineerLastName { get; set; }
-    // public List<string> EngineerLicenses { get; set; }
+    public List<EngineerLicense> EngineerLicenses { get; }
     public string EngineerFullName => $"{EngineerFirstName} {EngineerLastName}";
   }
 }
