@@ -51,7 +51,7 @@ namespace Factory.Controllers
     {
       Engineer thisEngineer = _db.Engineers.FirstOrDefault(engr => engr.EngineerId == id);
       ViewBag.PageTitle = $"Edit Engineer - {thisEngineer.EngineerFullName}";
-      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
+
       return View(thisEngineer);
     }
 
