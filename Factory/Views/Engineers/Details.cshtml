@@ -17,7 +17,6 @@
 }
 else 
 {
-  <ul>
     @foreach(EngineerMachine join in Model.AssignedMachines)
     {
       <li>@Html.ActionLink($"{join.Machine.MachineName}", "Details", "Machines", new {id = join.Machine.MachineId})</li>
@@ -27,7 +26,6 @@ else
         <input type="submit" value="Delete"/>
       }
     }
-  </ul>
 }
 </p>
 <p>
