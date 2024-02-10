@@ -41,6 +41,7 @@ namespace Factory.Controllers
     {
       Machine thisMachine = _db.Machines
           .Include(mcn => mcn.MachineEngineers)
+          .ThenInclude(join => join.Engineer)
           .FirstOrDefault(mcn => mcn.MachineId == id);
       ViewBag.PageTitle = $"Machine Details - {thisMachine.MachineName} ";
       ViewBag.EngineersCount = _db.Engineers.Count();
