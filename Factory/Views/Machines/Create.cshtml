@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Machine
+
+<h2>@ViewBag.PageTitle</h2>
+
+@using (Html.BeginForm())
+{
+  <p>
+    Machine Name: @Html.TextBoxFor(model => model.MachineName)<br />
+  </p>
+  <input type="submit" value="Add this Machine" />
+}
+<br /><br />
+@Html.ActionLink("Go back", "Index")
