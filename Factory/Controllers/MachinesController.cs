@@ -31,10 +31,18 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Create(Machine machine)
     {
-      _db.Machines.Add(machine);
-      _db.SaveChanges();
-      List<Machine> model = _db.Machines.ToList();
-      return View("Index", model);
+      if (!ModelState.IsValid)
+      {
+          ViewBag.PageTitle = "Add a Machine";
+          return View(machine);
+      }
+      else
+      {
+        _db.Machines.Add(machine);
+        _db.SaveChanges();
+        List<Machine> model = _db.Machines.ToList();
+        return View("Index", model);
+      }
     }
 
     public ActionResult Details(int id)

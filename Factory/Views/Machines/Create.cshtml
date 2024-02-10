@@ -10,6 +10,7 @@
 {
   <p>
     Machine Name: @Html.TextBoxFor(model => model.MachineName)<br />
+    @Html.ValidationMessageFor(model => model.MachineName, "", new { @class = "error" })
   </p>
   <input type="submit" value="Add this Machine" />
 }
