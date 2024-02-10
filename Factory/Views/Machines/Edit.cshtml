@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Machine
+@using Factory.Models;
+
+<h2>@ViewBag.PageTitle</h2>
+
+@using ( Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.MachineId)
+  @Html.HiddenFor(model => model.MachineEngineers)
+  <p>
+    Machine First Name: @Html.TextBoxFor(model => model.MachineName)<br />
+  </p>
+  <input type="submit" value="Confirm Changes" /><br />
+  @Html.ActionLink("Discard Changes", "Details", new {id = @Model.MachineId})
+}
+<br /><br />
+@Html.ActionLink("Back to All Machines", "Index")
