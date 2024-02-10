@@ -102,5 +102,14 @@ namespace Factory.Controllers
       }
       return RedirectToAction("Details", new { id = mcn.MachineId });
     }
+
+    [HttpPost]
+    public ActionResult DeleteLicense(int licenseId)
+    {
+      EngineerMachine licenseEntry = _db.EngineerMachines.FirstOrDefault(entry => entry.EngineerMachineId == licenseId);
+      _db.EngineerMachines.Remove(licenseEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
