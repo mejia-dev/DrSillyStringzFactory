@@ -67,9 +67,17 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Edit(Engineer eng)
     {
+      if (!ModelState.IsValid)
+      {
+          ViewBag.PageTitle = $"Edit Engineer - {eng.EngineerFullName}";
+          return View(eng);
+      }
+      else
+      {
       _db.Engineers.Update(eng);
       _db.SaveChanges();
       return RedirectToAction("Index");
+      }
     }
 
     public ActionResult Delete(int id)
