@@ -28,13 +28,34 @@ namespace Factory.Controllers
       ViewBag.PageTitle = "Add an Engineer";
       return View();
     }
+
     [HttpPost]
     public ActionResult Create(Engineer engineer)
     {
-      _db.Engineers.Add(engineer);
-      _db.SaveChanges();
-      List<Engineer> model = _db.Engineers.ToList();
-      return View("Index", model);
+      // if (!ModelState.IsValid)
+      // {
+      //     ViewBag.PageTitle = "Add an Engineer";
+      //     return View(engineer);
+      // }
+      // else
+      // {
+      //   _db.Engineers.Add(engineer);
+      //   _db.SaveChanges();
+      //   List<Engineer> model = _db.Engineers.ToList();
+      //   return View("Index", model);
+      // }
+      if (!ModelState.IsValid)
+      {
+          // ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+          ViewBag.PageTitle = "Add an Engineer";
+          return View(engineer);
+      }
+      else
+      {
+        _db.Engineers.Add(engineer);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
     }
 
     public ActionResult Details(int id)

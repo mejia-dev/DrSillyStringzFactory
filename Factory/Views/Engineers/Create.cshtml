@@ -11,6 +11,8 @@
   <p>
     Engineer First Name: @Html.TextBoxFor(model => model.EngineerFirstName)<br />
     Engineer Last Name: @Html.TextBoxFor(model => model.EngineerLastName)<br />
+    @Html.ValidationMessageFor(model => model.EngineerFirstName, "", new { @class = "error" })
+    @Html.ValidationMessageFor(model => model.EngineerLastName, "", new { @class = "error" })
   </p>
   <input type="submit" value="Add this Engineer" />
 }
