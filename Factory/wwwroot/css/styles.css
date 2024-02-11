@@ -9,7 +9,9 @@ h1 {
   color: #CBCBD4;
 }
 
-h2, h3, h4 {
+h2,
+h3,
+h4 {
   font-family: 'AirFactoryRounded', sans-serif;
 }
 
@@ -62,6 +64,35 @@ a {
   color: #F8333C;
   font-style: italic;
 }
-.error>span>a{
+
+.error>span>a {
   color: #F8333C;
+}
+
+#footerConveyorBelt {
+  width: 100%;
+  position: fixed;
+  overflow: hidden;
+  white-space: nowrap;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  background-image: url(../img/conveyorBelt.png);
+  /* background-color: red; */
+  box-shadow: 0px -10px 10px black;
+}
+
+#footerConveyorBelt img {
+  width: auto;
+  height: 75px;
+  animation: conveyorBelt 20s linear infinite;
+}
+
+@keyframes conveyorBelt {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
