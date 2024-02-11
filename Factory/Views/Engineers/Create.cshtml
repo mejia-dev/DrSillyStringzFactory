@@ -6,12 +6,12 @@
 
 <h2>@ViewBag.PageTitle</h2>
 
-@using ( Html.BeginForm())
+@using (Html.BeginForm())
 {
   <p>
     Engineer First Name: @Html.TextBoxFor(model => model.EngineerFirstName)<br />
+    @Html.ValidationMessageFor(model => model.EngineerFirstName, "", new { @class = "error" })<br />
     Engineer Last Name: @Html.TextBoxFor(model => model.EngineerLastName)<br />
-    @Html.ValidationMessageFor(model => model.EngineerFirstName, "", new { @class = "error" })
     @Html.ValidationMessageFor(model => model.EngineerLastName, "", new { @class = "error" })
   </p>
   <input type="submit" value="Add this Engineer" />
