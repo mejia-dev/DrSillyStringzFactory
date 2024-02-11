@@ -6,6 +6,7 @@
 h1 {
   font-family: 'Earwig Factory', sans-serif;
   text-align: center;
+  color: #CBCBD4;
 }
 
 h2, h3, h4 {
@@ -13,12 +14,33 @@ h2, h3, h4 {
 }
 
 #header {
-  padding: 8px;
   font-size: 150%;
+  background-color: #635380;
+  border-style: outset;
+  box-shadow: 0px 10px 10px black;
+}
+
+#header>p {
+  font-family: 'Wild Script', sans-serif;
+  color: #CBCBD4;
+  font-size: 80%;
+}
+
+#headerNavDiv>button {
+  background-color: #CBCBD4;
+  padding: 5px;
+  border-radius: 20px;
+  font-size: 80%;
+}
+
+#headerNavDiv>button>a {
+  all: unset;
+  color: #635380;
 }
 
 body {
   text-align: center;
+  background-color: #CBCBD4;
 }
 
 #home-index-body-content {
@@ -32,14 +54,14 @@ p {
 }
 
 a {
-  font-family: 'Wild Script', sans-serif;
-  
+  color: #635380;
+  font-family: 'Noto Sans Ethiopic', sans-serif;
 }
 
 .error {
-  color: red;
+  color: #F8333C;
   font-style: italic;
 }
 .error>span>a{
-  color: red;
+  color: #F8333C;
 }
