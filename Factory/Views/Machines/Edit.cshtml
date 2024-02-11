@@ -12,7 +12,8 @@
   @Html.HiddenFor(model => model.MachineId)
   @Html.HiddenFor(model => model.MachineEngineers)
   <p>
-    Machine First Name: @Html.TextBoxFor(model => model.MachineName)<br />
+    Machine Name: @Html.TextBoxFor(model => model.MachineName)<br />
+    @Html.ValidationMessageFor(model => model.MachineName, "", new { @class = "error" })
   </p>
   <input type="submit" value="Confirm Changes" /><br />
   @Html.ActionLink("Discard Changes", "Details", new {id = @Model.MachineId})

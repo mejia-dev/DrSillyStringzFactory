@@ -66,9 +66,17 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Edit(Machine mcn)
     {
+      if (!ModelState.IsValid)
+      {
+          ViewBag.PageTitle = $"Edit Machine - {mcn.MachineName}";
+          return View(mcn);
+      }
+      else
+      {
       _db.Machines.Update(mcn);
       _db.SaveChanges();
       return RedirectToAction("Index");
+      }
     }
 
     public ActionResult Delete(int id)
