@@ -9,6 +9,7 @@ Created by: [github.com/mejia-dev](https://github.com/mejia-dev)
 
 * C#
 * ASP.NET / MVC
+* Entity Framework / EFCore
 * MySQL
 * Razor
 
